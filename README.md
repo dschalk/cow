@@ -27,7 +27,6 @@ Here is the file that finally worked:
  ```
 Here is the message in Chrome:
 
-```
 [mobservable.view '[m#1]'] Caught error during computation:  TypeError: Cannot call a class as a function
     at _classCallCheck (http://localhost:3000/bundle.js:64:100)
     at B2 (http://localhost:3000/bundle.js:85:6)
@@ -44,4 +43,3 @@ bundle.js:20659 [mobservable] You have created a view function that doesn't obse
 bundle.js:20770 [mobservable.sideEffect] not a single observable was used inside the side-effect function. Side-effect would be a no-op.
 bundle.js:773 Uncaught Error: Invariant Violation: B2.render(): A valid ReactComponent must be returned. You may have returned undefined, an array or some other invalid object.invariant @ bundle.js:773ReactCompositeComponentMixin._renderValidatedComponent @ bundle.js:11856ReactPerf.measure.wrapper @ bundle.js:3557ReactCompositeComponentMixin.mountComponent @ bundle.js:11272ReactPerf.measure.wrapper @ bundle.js:3557ReactReconciler.mountComponent @ bundle.js:3632mountComponentIntoNode @ bundle.js:8732Mixin.perform @ bundle.js:4682batchedMountComponentIntoNode @ bundle.js:8753Mixin.perform @ bundle.js:4682ReactDefaultBatchingStrategy.batchedUpdates @ bundle.js:15812batchedUpdates @ bundle.js:3209ReactMount._renderNewRootComponent @ bundle.js:8888ReactPerf.measure.wrapper @ bundle.js:3557ReactMount.render @ bundle.js:8977ReactPerf.measure.wrapper @ bundle.js:3557(anonymous function) @ bundle.js:109__webpack_require__ @ bundle.js:20Object.defineProperty.value @ bundle.js:49__webpack_require__ @ bundle.js:20(anonymous function) @ bundle.js:40(anonymous function) @ bundle.js:43
 bundle.js:20850 Welcome to mobservable. Current logLevel = 2. Change mobservable.logLevel according to your needs: 0 = production, 1 = development, 2 = debugging
-```
