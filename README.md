@@ -1,8 +1,10 @@
 My applications at [http://schalk.ninja](http://schalk.ninja) and [http://transcendent.ninja](http://transcendent.ninja) have had their code published at Github at [https://github.com/dschalk/mobservable-react-buttons](https://github.com/dschalk/mobservable-react-buttons) and [https://github.com/dschalk/mobservable-monads](https://github.com/dschalk/mobservable-monads)
 
-I uploaded the apps from time to time during development, having .gitignore specify that node_modules should be ignored. I downloaded the latest version and either copied a saved node_modules file or ran npm install. My package.json specified only "latest" for the versions.
+I uploaded the apps from time to time during development, having .gitignore specify that node_modules should be ignored. I cloned the recently pushed version and either copied a saved node_modules file or ran npm install. My package.json, which I created with "npm init" after installing the node modules, specified only "latest" for the versions.
 
-Several days ago, running npm install and then webpack started to produce bundle.js files that crashed in the browsers. I couldn't make sense of the cryptic error messages, so I deleted code until I got down to a bare-bones B2.jsx file that was supposed to display "Cow" in the browsers. I continued to get the same error messages until I deleted @reactiveComponent.
+Several days ago, running npm install and then webpack started to produce bundle.js files resulted in crashes in the browsers. I deleted code  down to a bare-bones B2.jsx file that was supposed to display "Cow" in the browsers. I continued to get the same error messages until I commented out @reactiveComponent.
+
+All of the code is at [https://github.com/dschalk/cow](https://github.com/dschalk/cow).
 
 Here is the file that finally worked:
 
@@ -25,7 +27,7 @@ Here is the file that finally worked:
  }
  React.render(<B2 key='B2' />, document.getElementById('divSix'))
  ```
-Here is the message in Chrome:
+You can see what I commented out in order to stop getting the following message in Chrome:
 
 [mobservable.view '[m#1]'] Caught error during computation:  TypeError: Cannot call a class as a function
     at _classCallCheck (http://localhost:3000/bundle.js:64:100)
