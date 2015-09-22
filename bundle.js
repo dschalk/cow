@@ -57,6 +57,8 @@
 	  value: true
 	});
 
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
 	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -75,30 +77,212 @@
 
 	var _mobservableReact = __webpack_require__(159);
 
+	var reactMixin = __webpack_require__(160);
 	exports.B2 = B2;
 
-	var B2 = (function (_React$Component) {
-	  _inherits(B2, _React$Component);
+	var GroupNew = (function (_React$Component) {
+	  _inherits(GroupNew, _React$Component);
 
-	  // class B2 extends React.Component {
+	  function GroupNew(props) {
+	    var _this = this;
+
+	    _classCallCheck(this, _GroupNew);
+
+	    _get(Object.getPrototypeOf(_GroupNew.prototype), 'constructor', this).call(this, props);
+
+	    this.render = function () {
+	      if (_this.props.hidden2) {
+	        return null;
+	      }
+	      return _react2['default'].createElement(
+	        'div',
+	        { style: { marginLeft: 5 } },
+	        _react2['default'].createElement(
+	          'label',
+	          null,
+	          'Player defined group name:  ',
+	          _react2['default'].createElement('input', { type: 'text', id: 'cow', onKeyDown: _this.handleEnter.bind(_this),
+	            onClick: _this.click.bind(_this), style: { width: 90, backgroundColor: '#d8d17d', marginLeft: 10 } })
+	        )
+	      );
+	    };
+	  }
+
+	  _createClass(GroupNew, [{
+	    key: 'handleEnter',
+	    value: function handleEnter(event) {
+	      var group = event.target.value;
+	      if (group == '') {
+	        return;
+	      } else {
+	        if (event.keyCode == 13) {
+	          this.props.data.group = group;
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'click',
+	    value: function click(event) {
+	      var group = event.target.value;
+	      if (group == '') {
+	        return;
+	      } else {
+	        this.props.data.group = group;
+	      }
+	    }
+	  }]);
+
+	  var _GroupNew = GroupNew;
+	  GroupNew = (0, _mobservableReact.reactiveComponent)(GroupNew) || GroupNew;
+	  return GroupNew;
+	})(_react2['default'].Component);
+
+	;
+
+	var data = _mobservable2['default'].makeReactive({
+	  group: 'solo',
+	  Ahover: false,
+	  Afocus: false,
+	  Bhover: false,
+	  Bfocus: false,
+	  Chover: false,
+	  Cfocus: false,
+	  Shover: false,
+	  Sfocus: false,
+	  style1: { a: '#000', b: 'green', c: '#FFE4C4' },
+	  style2: { a: 'blue', b: 'skyblue', c: 'yellow' },
+	  fA: function fA() {
+	    if (this.Ahover || this.group === 'GroupA') {
+	      return this.style2;
+	    }
+	    return this.style1;
+	  },
+	  fB: function fB() {
+	    if (this.Bhover || this.group === 'GroupB') {
+	      return this.style2;
+	    }
+	    return this.style1;
+	  },
+	  fC: function fC() {
+	    if (this.Chover || this.group === 'GroupC') {
+	      return this.style2;
+	    }
+	    return this.style1;
+	  },
+	  fS: function fS() {
+	    if (this.Shover || this.group === 'solo') {
+	      return this.style2;
+	    }
+	    return this.style1;
+	  }
+	});
+
+	var B2 = (function (_React$Component2) {
+	  _inherits(B2, _React$Component2);
+
 	  function B2(props) {
+	    var _this2 = this;
+
 	    _classCallCheck(this, _B2);
 
 	    _get(Object.getPrototypeOf(_B2.prototype), 'constructor', this).call(this, props);
 
+	    this.style8 = function (x, y, z) {
+	      return { backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
+	        color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 };
+	    };
+
 	    this.render = function () {
+	      var group = _this2.data.group;
 	      return _react2['default'].createElement(
 	        'div',
-	        null,
-	        ' ',
+	        { style: { backgroundColor: '#000', height: 3800, width: '100%', color: '#FFE4C4' } },
+	        _react2['default'].createElement('br', null),
+	        _react2['default'].createElement('br', null),
+	        _react2['default'].createElement('br', null),
 	        _react2['default'].createElement(
 	          'h1',
-	          null,
-	          'Cow'
+	          { style: { textAlign: 'center' } },
+	          'Reactive Buttons'
 	        ),
-	        ' '
+	        _react2['default'].createElement(
+	          'div',
+	          { style: { width: '80%', marginLeft: 85, float: 'right', marginRight: 2, color: '#FFE4C4' } },
+	          _react2['default'].createElement('br', null),
+	          'Current Group:',
+	          _react2['default'].createElement(
+	            'button',
+	            { style: _this2.style8('blue', 'lightgreen', 'red') },
+	            group
+	          ),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement(
+	            'button',
+	            { onClick: function () {
+	                _this2.data.group = 'GroupA';
+	              },
+	              onMouseEnter: function () {
+	                _this2.data.Ahover = true;
+	              },
+	              onMouseLeave: function () {
+	                _this2.data.Ahover = false;
+	              },
+	              style: _this2.style8(_this2.data.fA.a, _this2.data.fA.b, _this2.data.fA.c) },
+	            'GroupA'
+	          ),
+	          _react2['default'].createElement(
+	            'button',
+	            { onClick: function () {
+	                _this2.data.group = 'GroupB';
+	              },
+	              onMouseEnter: function () {
+	                _this2.data.Bhover = true;
+	              },
+	              onMouseLeave: function () {
+	                _this2.data.Bhover = false;
+	              },
+	              style: _this2.style8(_this2.data.fB.a, _this2.data.fB.b, _this2.data.fB.c) },
+	            'GroupB'
+	          ),
+	          _react2['default'].createElement(
+	            'button',
+	            { onClick: function () {
+	                _this2.data.group = 'GroupC';
+	              },
+	              onMouseEnter: function () {
+	                _this2.data.Chover = true;
+	              },
+	              onMouseLeave: function () {
+	                _this2.data.Chover = false;
+	              },
+	              style: _this2.style8(_this2.data.fC.a, _this2.data.fC.b, _this2.data.fC.c) },
+	            'GroupC'
+	          ),
+	          _react2['default'].createElement(
+	            'button',
+	            { onClick: function () {
+	                _this2.data.group = 'solo';
+	              },
+	              onMouseEnter: function () {
+	                _this2.data.Shover = true;
+	              },
+	              onMouseLeave: function () {
+	                _this2.data.Shover = false;
+	              },
+	              style: _this2.style8(_this2.data.fS.a, _this2.data.fS.b, _this2.data.fS.c) },
+	            'solo'
+	          ),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement(GroupNew, { key: 'GroupNew', data: _this2.data }),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null)
+	        )
 	      );
 	    };
+
+	    this.data = data;
 	  }
 
 	  var _B2 = B2;
@@ -20844,7 +21028,7 @@
 	        return [result, disposer, disposer['$mobservable']];
 	    }
 	    mobservable.observeUntilInvalid = observeUntilInvalid;
-	    mobservable.logLevel = 2;
+	    mobservable.logLevel = 1;
 	    setTimeout(function () {
 	        if (mobservable.logLevel > 0)
 	            console.info("Welcome to mobservable. Current logLevel = " + mobservable.logLevel + ". Change mobservable.logLevel according to your needs: 0 = production, 1 = development, 2 = debugging");
@@ -21822,7 +22006,379 @@
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
-	!function(e,t){ true?module.exports=t(__webpack_require__(158),__webpack_require__(2)):"function"==typeof define&&define.amd?define(["mobservable","react"],t):"object"==typeof exports?exports.mobservableReact=t(require("mobservable"),require("react")):e.mobservableReact=t(e.mobservable,e.react)}(this,function(e,t){return function(e){function t(o){if(n[o])return n[o].exports;var r=n[o]={exports:{},id:o,loaded:!1};return e[o].call(r.exports,r,r.exports,t),r.loaded=!0,r.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,t,n){var o,r,i;!function(){function s(e,t){function n(e){var n=t.findDOMNode(e);n&&p.set(n,e),c.emit({event:"render",renderTime:e.__renderEnd-e.__renderStart,totalTime:Date.now()-e.__renderStart,component:e,node:n})}function o(e,t){var n=e[t],o=u[t];e[t]=function(){n&&n.apply(this,arguments),o.apply(this,arguments)}}function r(e){if("function"==typeof e&&!e.prototype.render&&!e.isReactClass)return r(t.createClass({displayName:e.name,render:function(){return e.call(this,this.props)}}));if(!e)throw new Error("Please pass a valid component to 'reactiveComponent'");var n=e.prototype||e;return["componentWillMount","componentWillUnmount","componentDidMount","componentDidUpdate"].forEach(function(e){o(n,e)}),n.shouldComponentUpdate||(n.shouldComponentUpdate=u.shouldComponentUpdate),e}function i(){if("undefined"==typeof WeakMap)throw new Error("tracking components is not supported in this browser");a||(a=!0)}var s=1,a=!1,p="undefined"!=typeof WeakMap?new WeakMap:void 0,c=new e._.SimpleEventEmitter,u={componentWillMount:function(){var n=((this.displayName||this.constructor.name||"ReactiveComponent")+s++,this.render);this.render=function(){a&&(this.__renderStart=Date.now()),this.__watchDisposer&&this.__watchDisposer();var o,r=!1;return this.__watchDisposer=e.sideEffect(function(){r?t.Component.prototype.forceUpdate.call(this):(r=!0,o=n.call(this))},this),this.$mobservable=this.__watchDisposer.$mobservable,a&&(this.__renderEnd=Date.now()),o}},componentWillUnmount:function(){if(this.__watchDisposer&&this.__watchDisposer(),delete this.$mobservable,a){var e=t.findDOMNode(this);e&&(p.delete(e),c.emit({event:"destroy",component:this,node:e}))}},componentDidMount:function(){a&&n(this)},componentDidUpdate:function(){a&&n(this)},shouldComponentUpdate:function(t,n){if(this.state!==n)return!0;var o,r=Object.keys(this.props);if(r.length!==Object.keys(t).length)return!0;for(var i=r.length-1;o=r[i];i--){var s=t[o];if(s!==this.props[o])return!0;if(s&&"object"==typeof s&&!e.isReactive(s))return!0}return!1}};return{reactiveComponent:r,renderReporter:c,componentByNodeRegistery:p,trackComponents:i}}r=[n(1),n(2)],o=s,i="function"==typeof o?o.apply(t,r):o,!(void 0!==i&&(e.exports=i))}()},function(t,n){t.exports=e},function(e,n){e.exports=t}])});
+	!function(e,t){ true?module.exports=t(__webpack_require__(158),__webpack_require__(2)):"function"==typeof define&&define.amd?define(["mobservable","react"],t):"object"==typeof exports?exports.mobservableReact=t(require("mobservable"),require("react")):e.mobservableReact=t(e.mobservable,e.React)}(this,function(e,t){return function(e){function t(n){if(o[n])return o[n].exports;var r=o[n]={exports:{},id:n,loaded:!1};return e[n].call(r.exports,r,r.exports,t),r.loaded=!0,r.exports}var o={};return t.m=e,t.c=o,t.p="",t(0)}([function(e,t,o){var n,r,i;!function(){function s(e,t){function o(e){var o=t.findDOMNode(e);o&&p.set(o,e),a.emit({event:"render",renderTime:e.__$mobRenderEnd-e.__$mobRenderStart,totalTime:Date.now()-e.__$mobRenderStart,component:e,node:o})}function n(e,t){var o=e[t],n=c[t];e[t]=function(){o&&o.apply(this,arguments),n.apply(this,arguments)}}function r(e){if("function"==typeof e&&!e.prototype.render&&!e.isReactClass&&!t.Component.isPrototypeOf(e))return r(t.createClass({displayName:e.name,render:function(){return e.call(this,this.props)}}));if(!e)throw new Error("Please pass a valid component to 'reactiveComponent'");var o=e.prototype||e;return["componentWillMount","componentWillUnmount","componentDidMount","componentDidUpdate"].forEach(function(e){n(o,e)}),o.shouldComponentUpdate||(o.shouldComponentUpdate=c.shouldComponentUpdate),e}function i(){if("undefined"==typeof WeakMap)throw new Error("tracking components is not supported in this browser");s||(s=!0)}var s=!1,p="undefined"!=typeof WeakMap?new WeakMap:void 0,a=new e._.SimpleEventEmitter,c={componentWillMount:function(){var o=this.render;this.__$mobDependencies=[],this.render=function(){s&&(this.__$mobRenderStart=Date.now());var n,r=!1;this.__$mobDisposer=e.observe(function(){r?(this.__$mobDisposer(),t.Component.prototype.forceUpdate.call(this)):(r=!0,n=o.call(this))},this),this.$mobservable=this.__$mobDisposer.$mobservable;var i=this.$mobservable.observing.map(function(e){return e.setRefCount(1),e});return this.__$mobDependencies.forEach(function(e){e.setRefCount(-1)}),this.__$mobDependencies=i,s&&(this.__$mobRenderEnd=Date.now()),n}},componentWillUnmount:function(){if(this.__$mobDisposer&&this.__$mobDisposer(),this.__$mobDependencies.forEach(function(e){e.setRefCount(-1)}),delete this.$mobservable,s){var e=t.findDOMNode(this);e&&(p.delete(e),a.emit({event:"destroy",component:this,node:e}))}},componentDidMount:function(){s&&o(this)},componentDidUpdate:function(){s&&o(this)},shouldComponentUpdate:function(t,o){if(this.state!==o)return!0;var n,r=Object.keys(this.props);if(r.length!==Object.keys(t).length)return!0;for(var i=r.length-1;n=r[i];i--){var s=t[n];if(s!==this.props[n])return!0;if(s&&"object"==typeof s&&!e.isReactive(s))return!0}return!1}};return{reactiveComponent:r,renderReporter:a,componentByNodeRegistery:p,trackComponents:i}}r=[o(1),o(2)],n=s,i="function"==typeof n?n.apply(t,r):n,!(void 0!==i&&(e.exports=i))}()},function(t,o){t.exports=e},function(e,o){e.exports=t}])});
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var mixin = __webpack_require__(161);
+	var assign = __webpack_require__(162);
+
+	var mixinProto = mixin({
+	  // lifecycle stuff is as you'd expect
+	  componentDidMount: mixin.MANY,
+	  componentWillMount: mixin.MANY,
+	  componentWillReceiveProps: mixin.MANY,
+	  shouldComponentUpdate: mixin.ONCE,
+	  componentWillUpdate: mixin.MANY,
+	  componentDidUpdate: mixin.MANY,
+	  componentWillUnmount: mixin.MANY,
+	  getChildContext: mixin.MANY_MERGED
+	});
+
+	function setDefaultProps(reactMixin) {
+	  var getDefaultProps = reactMixin.getDefaultProps;
+
+	  if (getDefaultProps) {
+	    reactMixin.defaultProps = getDefaultProps();
+
+	    delete reactMixin.getDefaultProps;
+	  }
+	}
+
+	function setInitialState(reactMixin) {
+	  var getInitialState = reactMixin.getInitialState;
+	  var componentWillMount = reactMixin.componentWillMount;
+
+	  function applyInitialState(instance) {
+	    var state = instance.state || {};
+	    assign(state, getInitialState.call(instance));
+	    instance.state = state;
+	  }
+
+	  if (getInitialState) {
+	    if (!componentWillMount) {
+	      reactMixin.componentWillMount = function() {
+	        applyInitialState(this);
+	      };
+	    } else {
+	      reactMixin.componentWillMount = function() {
+	        applyInitialState(this);
+	        componentWillMount.call(this);
+	      };
+	    }
+
+	    delete reactMixin.getInitialState;
+	  }
+	}
+
+	function mixinClass(reactClass, reactMixin) {
+	  setDefaultProps(reactMixin);
+	  setInitialState(reactMixin);
+
+	  var prototypeMethods = {};
+	  var staticProps = {};
+
+	  Object.keys(reactMixin).forEach(function(key) {
+	    if (key === 'mixins') {
+	      return; // Handled below to ensure proper order regardless of property iteration order
+	    }
+	    if (key === 'statics') {
+	      return; // gets special handling
+	    } else if (typeof reactMixin[key] === 'function') {
+	      prototypeMethods[key] = reactMixin[key];
+	    } else {
+	      staticProps[key] = reactMixin[key];
+	    }
+	  });
+
+	  mixinProto(reactClass.prototype, prototypeMethods);
+
+	  var mergePropTypes = function(left, right, key) {
+	    if (!left) return right;
+	    if (!right) return left;
+
+	    var result = {};
+	    Object.keys(left).forEach(function(leftKey) {
+	      if (!right[leftKey]) {
+	        result[leftKey] = left[leftKey];
+	      }
+	    });
+
+	    Object.keys(right).forEach(function(rightKey) {
+	      if (left[rightKey]) {
+	        result[rightKey] = function checkBothContextTypes() {
+	          return right[rightKey].apply(this, arguments) && left[rightKey].apply(this, arguments);
+	        };
+	      } else {
+	        result[rightKey] = right[rightKey];
+	      }
+	    });
+
+	    return result;
+	  };
+
+	  mixin({
+	    childContextTypes: mergePropTypes,
+	    contextTypes: mergePropTypes,
+	    propTypes: mixin.MANY_MERGED_LOOSE,
+	    defaultProps: mixin.MANY_MERGED_LOOSE
+	  })(reactClass, staticProps);
+
+	  // statics is a special case because it merges directly onto the class
+	  if (reactMixin.statics) {
+	    Object.getOwnPropertyNames(reactMixin.statics).forEach(function(key) {
+	      var left = reactClass[key];
+	      var right = reactMixin.statics[key];
+
+	      if (left !== undefined && right !== undefined) {
+	        throw new TypeError('Cannot mixin statics because statics.' + key + ' and Component.' + key + ' are defined.');
+	      }
+
+	      reactClass[key] = left !== undefined ? left : right;
+	    });
+	  }
+
+	  // If more mixins are defined, they need to run. This emulate's react's behavior.
+	  // See behavior in code at:
+	  // https://github.com/facebook/react/blob/41aa3496aa632634f650edbe10d617799922d265/src/isomorphic/classic/class/ReactClass.js#L468
+	  // Note the .reverse(). In React, a fresh constructor is created, then all mixins are mixed in recursively,
+	  // then the actual spec is mixed in last.
+	  //
+	  // With ES6 classes, the properties are already there, so smart-mixin mixes functions (a, b) -> b()a(), which is
+	  // the opposite of how React does it. If we reverse this array, we basically do the whole logic in reverse,
+	  // which makes the result the same. See the test for more.
+	  // See also:
+	  // https://github.com/facebook/react/blob/41aa3496aa632634f650edbe10d617799922d265/src/isomorphic/classic/class/ReactClass.js#L853
+	  if (reactMixin.mixins) {
+	    reactMixin.mixins.reverse().forEach(mixinClass.bind(null, reactClass));
+	  }
+
+	  return reactClass;
+	}
+
+	module.exports = (function() {
+	  var reactMixin = mixinProto;
+
+	  reactMixin.onClass = function(reactClass, mixin) {
+	    return mixinClass(reactClass, mixin);
+	  };
+
+	  reactMixin.decorate = function(mixin) {
+	    return function(reactClass) {
+	      return reactMixin.onClass(reactClass, mixin);
+	    };
+	  };
+
+	  return reactMixin;
+	})();
+
+
+/***/ },
+/* 161 */
+/***/ function(module, exports) {
+
+	var objToStr = function(x){ return Object.prototype.toString.call(x); };
+
+	var thrower = function(error){
+	    throw error;
+	};
+
+	var mixins = module.exports = function makeMixinFunction(rules, _opts){
+	    var opts = _opts || {};
+	    if (!opts.unknownFunction) {
+	        opts.unknownFunction = mixins.ONCE;
+	    }
+
+	    if (!opts.nonFunctionProperty) {
+	        opts.nonFunctionProperty = function(left, right, key){
+	            if (left !== undefined && right !== undefined) {
+	                var getTypeName = function(obj){
+	                    if (obj && obj.constructor && obj.constructor.name) {
+	                        return obj.constructor.name;
+	                    }
+	                    else {
+	                        return objToStr(obj).slice(8, -1);
+	                    }
+	                };
+	                throw new TypeError('Cannot mixin key ' + key + ' because it is provided by multiple sources, '
+	                        + 'and the types are ' + getTypeName(left) + ' and ' + getTypeName(right));
+	            }
+	            return left === undefined ? right : left;
+	        };
+	    }
+
+	    function setNonEnumerable(target, key, value){
+	        if (key in target){
+	            target[key] = value;
+	        }
+	        else {
+	            Object.defineProperty(target, key, {
+	                value: value,
+	                writable: true,
+	                configurable: true
+	            });
+	        }
+	    }
+
+	    return function applyMixin(source, mixin){
+	        Object.keys(mixin).forEach(function(key){
+	            var left = source[key], right = mixin[key], rule = rules[key];
+
+	            // this is just a weird case where the key was defined, but there's no value
+	            // behave like the key wasn't defined
+	            if (left === undefined && right === undefined) return;
+
+	            var wrapIfFunction = function(thing){
+	                return typeof thing !== "function" ? thing
+	                : function(){
+	                    return thing.call(this, arguments);
+	                };
+	            };
+
+	            // do we have a rule for this key?
+	            if (rule) {
+	                // may throw here
+	                var fn = rule(left, right, key);
+	                setNonEnumerable(source, key, wrapIfFunction(fn));
+	                return;
+	            }
+
+	            var leftIsFn = typeof left === "function";
+	            var rightIsFn = typeof right === "function";
+
+	            // check to see if they're some combination of functions or undefined
+	            // we already know there's no rule, so use the unknown function behavior
+	            if (leftIsFn && right === undefined
+	             || rightIsFn && left === undefined
+	             || leftIsFn && rightIsFn) {
+	                // may throw, the default is ONCE so if both are functions
+	                // the default is to throw
+	                setNonEnumerable(source, key, wrapIfFunction(opts.unknownFunction(left, right, key)));
+	                return;
+	            }
+
+	            // we have no rule for them, one may be a function but one or both aren't
+	            // our default is MANY_MERGED_LOOSE which will merge objects, concat arrays
+	            // and throw if there's a type mismatch or both are primitives (how do you merge 3, and "foo"?)
+	            source[key] = opts.nonFunctionProperty(left, right, key);
+	        });
+	    };
+	};
+
+	mixins._mergeObjects = function(obj1, obj2) {
+	    var assertObject = function(obj, obj2){
+	        var type = objToStr(obj);
+	        if (type !== '[object Object]') {
+	            var displayType = obj.constructor ? obj.constructor.name : 'Unknown';
+	            var displayType2 = obj2.constructor ? obj2.constructor.name : 'Unknown';
+	            thrower('cannot merge returned value of type ' + displayType + ' with an ' + displayType2);
+	        }
+	    };
+
+	    if (Array.isArray(obj1) && Array.isArray(obj2)) {
+	        return obj1.concat(obj2);
+	    }
+
+	    assertObject(obj1, obj2);
+	    assertObject(obj2, obj1);
+
+	    var result = {};
+	    Object.keys(obj1).forEach(function(k){
+	        if (Object.prototype.hasOwnProperty.call(obj2, k)) {
+	            thrower('cannot merge returns because both have the ' + JSON.stringify(k) + ' key');
+	        }
+	        result[k] = obj1[k];
+	    });
+
+	    Object.keys(obj2).forEach(function(k){
+	        // we can skip the conflict check because all conflicts would already be found
+	        result[k] = obj2[k];
+	    });
+	    return result;
+
+	}
+
+	// define our built-in mixin types
+	mixins.ONCE = function(left, right, key){
+	    if (left && right) {
+	        throw new TypeError('Cannot mixin ' + key + ' because it has a unique constraint.');
+	    }
+
+	    var fn = left || right;
+
+	    return function(args){
+	        return fn.apply(this, args);
+	    };
+	};
+
+	mixins.MANY = function(left, right, key){
+	    return function(args){
+	        if (right) right.apply(this, args);
+	        return left ? left.apply(this, args) : undefined;
+	    };
+	};
+
+	mixins.MANY_MERGED_LOOSE = function(left, right, key) {
+	    if(left && right) {
+	        return mixins._mergeObjects(left, right);
+	    }
+
+	    return left || right;
+	}
+
+	mixins.MANY_MERGED = function(left, right, key){
+	    return function(args){
+	        var res1 = right && right.apply(this, args);
+	        var res2 = left && left.apply(this, args);
+	        if (res1 && res2) {
+	            return mixins._mergeObjects(res1, res2)
+	        }
+	        return res2 || res1;
+	    };
+	};
+
+
+	mixins.REDUCE_LEFT = function(_left, _right, key){
+	    var left = _left || function(x){ return x };
+	    var right = _right || function(x){ return x };
+	    return function(args){
+	        return right.call(this, left.apply(this, args));
+	    };
+	};
+
+	mixins.REDUCE_RIGHT = function(_left, _right, key){
+	    var left = _left || function(x){ return x };
+	    var right = _right || function(x){ return x };
+	    return function(args){
+	        return left.call(this, right.apply(this, args));
+	    };
+	};
+
+
+
+/***/ },
+/* 162 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	function ToObject(val) {
+		if (val == null) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
+
+		return Object(val);
+	}
+
+	module.exports = Object.assign || function (target, source) {
+		var from;
+		var keys;
+		var to = ToObject(target);
+
+		for (var s = 1; s < arguments.length; s++) {
+			from = arguments[s];
+			keys = Object.keys(Object(from));
+
+			for (var i = 0; i < keys.length; i++) {
+				to[keys[i]] = from[keys[i]];
+			}
+		}
+
+		return to;
+	};
+
 
 /***/ }
 /******/ ]);

@@ -1,32 +1,32 @@
 {
-  "name": "client",
-  "version": "1.0.0",
+  "name": "bull",
+  "version": "0.3.0",
+  "description": "How is hover and focus possible if \"it is not allowed to change the state during the computation of a reactive view.\" My rollover buttons alter button colors when the mouse pointer hovers over a button or selects it. How can I accomplish this effect without altering state?",
   "main": "bundle.js",
   "dependencies": {
-    "babel": "latest",
-    "babel-core": "latest",
-    "babel-loader": "latest",
-    "file": "latest",
-    "mobservable": "latest",
-    "mobservable-react": "latest",
-    "react": "latest",
-    "webpack": "latest",
-    "webpack-dev-server": "latest"
+    "babel": "5.8.23",
+    "babel-core": "5.8.23",
+    "babel-loader": "5.3.2",
+    "file": "0.2.2",
+    "mobservable": "0.6.8",
+    "mobservable-react": "0.1.8",
+    "webpack": "1.12.1",
+    "react": "0.13.3",
+    "react-mixin": "1.7.0",
+    "webpack-dev-server": "1.11.0"
   },
-  "devDependencies": {
-    "mobservable-react-devtools": "^0.1.0"
-  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dschalk/mobservable-react-buttons.git"
+    "url": "git+https://github.com/dschalk/bull.git"
   },
+  "author": "David Schalk",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dschalk/mobservable-react-buttons/issues"
+    "url": "https://github.com/dschalk/bull/issues"
   },
-  "homepage": "https://github.com/dschalk/mobservable-react-buttons#readme"
+  "homepage": "https://github.com/dschalk/bull#readme"
 }
