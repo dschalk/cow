@@ -6,14 +6,21 @@ module.exports = {
         filename: 'bundle.js',
     },
     module: {
-        loaders: [
-          {
-    	      test: /\.jsx?$/,
-    	      exclude: /(node_modules|bower_components)/,
-            loader: 'babel?stage=0'
-          }
-        ]
-    },
+            loaders: [
+              {
+                test: /\.jsx$/,
+                loader: 'babel?stage=0'
+              },
+              {
+                test: /\.json$/,
+                loader: 'json'
+              },
+              {
+                test: /\.css$/,
+                loader: 'style!css'
+              }
+           ]
+         },
     resolve: {
         extensions: ['', '.js', '.jsx']
     }
