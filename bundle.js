@@ -81,8 +81,8 @@
 	var Markdown = __webpack_require__(160);
 	exports.B2 = B2;
 
-	var MyComponent = _react2['default'].createClass({
-	  displayName: 'MyComponent',
+	var Component = _react2['default'].createClass({
+	  displayName: 'Component',
 
 	  render: function render() {
 	    return _react2['default'].createElement(
@@ -98,8 +98,8 @@
 
 	});
 
-	var MyComponent2 = _react2['default'].createClass({
-	  displayName: 'MyComponent2',
+	var Component2 = _react2['default'].createClass({
+	  displayName: 'Component2',
 
 	  render: function render() {
 	    return _react2['default'].createElement(
@@ -115,8 +115,8 @@
 
 	});
 
-	var MyComponent3 = _react2['default'].createClass({
-	  displayName: 'MyComponent3',
+	var Component3 = _react2['default'].createClass({
+	  displayName: 'Component3',
 
 	  render: function render() {
 	    return _react2['default'].createElement(
@@ -132,8 +132,8 @@
 
 	});
 
-	var MyComponent4 = _react2['default'].createClass({
-	  displayName: 'MyComponent4',
+	var Component4 = _react2['default'].createClass({
+	  displayName: 'Component4',
 
 	  render: function render() {
 	    return _react2['default'].createElement(
@@ -149,8 +149,8 @@
 
 	});
 
-	var MyComponent5 = _react2['default'].createClass({
-	  displayName: 'MyComponent5',
+	var Component5 = _react2['default'].createClass({
+	  displayName: 'Component5',
 
 	  render: function render() {
 	    return _react2['default'].createElement(
@@ -159,15 +159,15 @@
 	      _react2['default'].createElement(
 	        Markdown,
 	        null,
-	        '\n          this.m\n          .bnd(this.mAdd,100,this.m3)\n          .bnd(this.mAdd,0,this.m)\n          .bnd(this.mAdd,0,this.m2)}\n        '
+	        '\n          onClick={() => {this.m\n          .ret(5)\n          .bnd(this.pause,1)\n          .then(() => {this.m.bnd(this.mAdd,5,this.m2)\n          .bnd(this.pause,1)\n          .then(() => {this.m2.bnd(this.mAdd,5,this.m3)\n          }) }) }}\n        '
 	      )
 	    );
 	  }
 
 	});
 
-	var MyComponent6 = _react2['default'].createClass({
-	  displayName: 'MyComponent6',
+	var Component6 = _react2['default'].createClass({
+	  displayName: 'Component6',
 
 	  render: function render() {
 	    return _react2['default'].createElement(
@@ -183,8 +183,8 @@
 
 	});
 
-	var MyComponent7 = _react2['default'].createClass({
-	  displayName: 'MyComponent7',
+	var Component7 = _react2['default'].createClass({
+	  displayName: 'Component7',
 
 	  render: function render() {
 	    return _react2['default'].createElement(
@@ -347,7 +347,7 @@
 	    };
 
 	    this.fibo = function (x) {
-	      _this4.m3.x(fibData.a + fibData.b);
+	      _this4.m3.x(_this4.fibData.a + _this4.fibData.b);
 	    };
 
 	    this.fibCalc = function (_ref) {
@@ -427,42 +427,40 @@
 	    };
 
 	    this.fmSubtract1 = function (w) {
-	      _this4.m.x(w - 1);
-	      return new Monad(_this4.m.x());
+	      return _this4.m.ret(w - 1);
 	    };
 
 	    this.fmSquare = function (w) {
-	      _this4.m.x(w * w);
-	      return new Monad(_this4.m.x());
+	      return _this4.m.ret(w * w);
 	    };
 
 	    this.identity = function (w) {
-	      _this4.m.x(w);
-	      return new Monad(_this4.m.x());
+	      _this4.m.ret(w);
+	    };
+
+	    this.pause = function (x, t) {
+	      return new Promise(function (resolve, reject) {
+	        setTimeout(resolve, t * 2000); // (A)
+	      });
 	    };
 
 	    this.fmAdd_then_Square = function (w) {
-	      _this4.m.x(w + 1);
-	      var z = _this4.m.x();
-	      _this4.m.x(z * z);
-	      return new Monad(_this4.m.x());
+	      return _this4.m.ret((w + 1) * (w + 1));
 	    };
 
 	    this.reset_1 = function () {
-	      _this4.m.x(1);
-	      return new Monad(_this4.m.x());
+	      return _this4.m.ret(1);
 	    };
 
 	    this.reset_2 = function () {
-	      _this4.m2.x(0);
-	      return new Monad(_this4.m.x());
+	      return _this4.m2.ret(0);
 	    };
 
 	    this.reset_3 = function () {
 	      _this4.m3.x(1);
 	      fibData.a = 1;
 	      fibData.b = 1;
-	      return new Monad(_this4.m.x());
+	      return new Monad(1);
 	    };
 
 	    this.comment1 = function () {
@@ -576,7 +574,7 @@
 	          _react2['default'].createElement(
 	            'span',
 	            null,
-	            ' Monad m: ',
+	            ' Monad m:  ',
 	            _react2['default'].createElement(
 	              'button',
 	              { style: _this4.style8('blue', 'lightblue', 'yellow') },
@@ -758,7 +756,7 @@
 	          ' ',
 	          _react2['default'].createElement('br', null),
 	          'The code that causes mo1 to have the values 20, 40, and 60 is:',
-	          _react2['default'].createElement(MyComponent7, null),
+	          _react2['default'].createElement(Component7, null),
 	          '\'this.m.bnd(this.fmSubtract1)\' is an unrelated function included in order to cause re-render as soon as the button is clicked, rather than when onMouseLeave is executed.',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
@@ -887,28 +885,34 @@
 	          'Here is the code for primitive monads:',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(MyComponent, null),
+	          _react2['default'].createElement(Component, null),
 	          _react2['default'].createElement('br', null),
 	          'And here is how we use instances of Monad to pass values along chains of computations: ',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
-	          'We begin by running the function \'mAdd\' three times, once to assign the value of \'m + 100\' to \'m3\', and twice to give the sum to \'m\' and then to \'m2\'. Here is the code for \'mAdd\':',
+	          'We begin by running the function \'mAdd\' three times, once to assign the value of \'m + 10\' to \'m\', again to assign m\'s value plus 100 to m2, and finally to assign m2\'s value plus 1000 to m3. A one-second pause is inserted between the operations. This is the code for mAdd:',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(MyComponent4, null),
+	          _react2['default'].createElement(Component4, null),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
-	          '\'z\' is the value of the calling monad, which is \'m\'. \'m\' starts out with a value of \'1\'. \'mAdd\' gives that value plus 100 to \'m3\'.ional monad with a value of 1. The display here confirms that m is an object with a method \'x\' which returns \'1\' when called with no argument. That is the expected behavior of a mobservabale reactive primitive value. Here is the code:',
+	          'And here is the code that is executed when the next button is clicked:',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(MyComponent5, null),
+	          _react2['default'].createElement(Component5, null),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement(
 	            'button',
-	            { style: _this4.style8(cr77, cr770, cr78), onClick: function () {
-	                _this4.m.bnd(_this4.mAdd, 100, _this4.m3).bnd(_this4.mAdd, 0, _this4.m).bnd(_this4.mAdd, 0, _this4.m2);
+	            { style: _this4.style8(cr77, cr770, cr78),
+	              onClick: function () {
+	                _this4.m.ret(5).bnd(_this4.pause, 1).then(function () {
+	                  _this4.m.bnd(_this4.mAdd, 5, _this4.m2).bnd(_this4.pause, 1).then(function () {
+	                    _this4.m2.bnd(_this4.mAdd, 5, _this4.m3);
+	                  });
+	                });
 	              },
+
 	              onMouseEnter: function () {
 	                _this4.mouse[77] = 'blue', _this4.mouse[770] = 'lightblue', _this4.mouse[78] = 'yellow';
 	              },
@@ -923,7 +927,9 @@
 	          _react2['default'].createElement(
 	            'button',
 	            { style: _this4.style8(cr87, cr870, cr88), onClick: function () {
-	                _this4.m.bnd(_this4.fmSubtract1);
+	                _this4.m.bnd(_this4.fmSubtract1).bnd(_this4.fmSubtract1).bnd(_this4.pause, 2).then(function () {
+	                  _this4.m.bnd(_this4.fmSubtract1).bnd(_this4.fmSubtract1).bnd(_this4.fmSubtract1);
+	                });
 	              },
 	              onMouseEnter: function () {
 	                _this4.mouse[87] = 'blue', _this4.mouse[870] = 'lightblue', _this4.mouse[88] = 'yellow';
@@ -950,7 +956,7 @@
 	            ' Click to see a seven-link chain of bnd.'
 	          ),
 	          'Clicking runs',
-	          _react2['default'].createElement(MyComponent6, null),
+	          _react2['default'].createElement(Component6, null),
 	          _react2['default'].createElement(
 	            'h3',
 	            null,
@@ -1108,7 +1114,7 @@
 	          'The monad laws stated in terms of Haskell are:',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(MyComponent2, null),
+	          _react2['default'].createElement(Component2, null),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
@@ -1273,7 +1279,7 @@
 	          'Here is the code for all three monads:',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(MyComponent3, null),
+	          _react2['default'].createElement(Component3, null),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
@@ -1289,6 +1295,7 @@
 	      display: 'inline'
 	    };
 	    this.mouse = mouseHandler;
+	    this.fibData = fibData;
 	    this.m = new Monad(1);
 	    this.m2 = new Monad(3);
 	    this.ma1 = new MonadArray([1, 1, 3]);

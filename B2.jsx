@@ -7,7 +7,7 @@ import {reactiveComponent} from 'mobservable-react';
 export {B2};
 
 
-var MyComponent = React.createClass({
+var Component = React.createClass({
 
   render: function() {
     return (
@@ -37,7 +37,7 @@ var MyComponent = React.createClass({
 
 });
 
-var MyComponent2 = React.createClass({
+var Component2 = React.createClass({
 
   render: function() {
     return (
@@ -55,7 +55,7 @@ var MyComponent2 = React.createClass({
 
 });
 
-var MyComponent3 = React.createClass({
+var Component3 = React.createClass({
 
   render: function() {
     return (
@@ -118,7 +118,7 @@ var MyComponent3 = React.createClass({
 });
 
 
-var MyComponent4 = React.createClass({
+var Component4 = React.createClass({
 
   render: function() {
     return (
@@ -137,17 +137,20 @@ var MyComponent4 = React.createClass({
 });
 
 
-var MyComponent5 = React.createClass({
+var Component5 = React.createClass({
 
   render: function() {
     return (
       <div style={{fontSize: 20}} >
         <Markdown>
         {`
-          this.m
-          .bnd(this.mAdd,100,this.m3)
-          .bnd(this.mAdd,0,this.m)
-          .bnd(this.mAdd,0,this.m2)}
+          onClick={() => {this.m
+          .ret(5)
+          .bnd(this.pause,1)
+          .then(() => {this.m.bnd(this.mAdd,5,this.m2)
+          .bnd(this.pause,1)
+          .then(() => {this.m2.bnd(this.mAdd,5,this.m3)
+          }) }) }}
         `}
         </Markdown>
       </div>
@@ -156,7 +159,7 @@ var MyComponent5 = React.createClass({
 
 });
 
-var MyComponent6 = React.createClass({
+var Component6 = React.createClass({
 
   render: function() {
     return (
@@ -178,7 +181,7 @@ var MyComponent6 = React.createClass({
 
 });
 
-var MyComponent7 = React.createClass({
+var Component7 = React.createClass({
 
   render: function() {
     return (
@@ -242,7 +245,7 @@ class Monad {
 
     this.bnd = (func, ...args) => {
       return func(this.x(), ...args);
-    };
+    }
 
     this.ret = a => {
       this.x(a);
@@ -303,7 +306,8 @@ fibData.m3.x.observe(function(m,k) {
         content3: null,
         display: 'inline'
       };
-    this.mouse = mouseHandler;
+      this.mouse = mouseHandler;
+      this.fibData = fibData;
     this.m = new Monad(1);
     this.m2 = new Monad(3);
     this.ma1 = new MonadArray([1,1,3]);
@@ -336,7 +340,7 @@ onTextareaChange3 = (event) => {
   });
 }
 
-  fibo = x => { this.m3.x(fibData.a + fibData.b) }
+  fibo = x => { this.m3.x(this.fibData.a + this.fibData.b) }
 
   fibCalc = ([a,b,c]) => {
     this.ma1.x.replace([a+b,a,c+1]);
@@ -395,42 +399,40 @@ onTextareaChange3 = (event) => {
   mAdd = (w,z,mon) => { return mon.ret(z + w); }
 
   fmSubtract1 = w => {
-    this.m.x(w - 1);
-    return new Monad(this.m.x());
-  }
+    return this.m.ret(w-1);
+}
 
   fmSquare = w => {
-    this.m.x(w * w);
-    return new Monad(this.m.x());
+    return this.m.ret(w*w);
   }
 
   identity = w => {
-    this.m.x(w);
-    return new Monad(this.m.x());
+    this.m.ret(w);
   }
 
+  pause = (x,t) => {
+        return new Promise(function (resolve, reject) {
+            setTimeout(resolve, t*2000); // (A)
+        });
+    }
+
   fmAdd_then_Square = w => {
-    this.m.x(w + 1);
-    let z = this.m.x();
-    this.m.x(z * z);
-    return new Monad(this.m.x());
+    return this.m.ret((w+1)*(w+1));
   };
 
   reset_1 = () => {
-    this.m.x(1);
-    return new Monad(this.m.x());
+    return this.m.ret(1);
   }
 
   reset_2 = () => {
-    this.m2.x(0);
-    return new Monad(this.m.x());
+    return this.m2.ret(0);
   }
 
   reset_3 = () => {
     this.m3.x(1);
     fibData.a = 1;
     fibData.b = 1;
-    return new Monad(this.m.x());
+    return new Monad(1);
   }
 
   comment1 = () => {
@@ -494,7 +496,7 @@ onTextareaChange3 = (event) => {
    <span> Monad mo2 <button style={this.style8('blue','lightblue','yellow')} >{this.mo2.x.a}, {this.mo2.x.b}, {this.mo2.x.c}</button> </span> <br />
    <span> Monad mo3 <button style={this.style8('blue','lightblue','yellow')} >{this.mo3.x.a}</button> </span> <br />
 
-   <span> Monad m: <button  style={this.style8('blue','lightblue','yellow')} >{this.m.x()}</button> </span> <br />
+   <span> Monad m:  <button  style={this.style8('blue','lightblue','yellow')} >{this.m.x()}</button> </span> <br />
    <span> Monad m2: <button style={this.style8('blue','lightblue','yellow')} >{this.m2.x()}</button> </span> <br />
    <span> Monad m3: <button style={this.style8('blue','lightblue','yellow')} >{this.m3.x()}</button> </span> <br />
    <span> Monad ma1 <button style={this.style8('blue','lightblue','yellow')} >{this.ma1.x[0]}, {this.ma1.x[1]}, {this.ma1.x[2]}</button> </span> <br />
@@ -548,7 +550,7 @@ Example 3, illustrating the left identity property of monads. This result is ide
           </button>
           <br /> <br />
           The code that causes mo1 to have the values 20, 40, and 60 is:
-<MyComponent7 />
+<Component7 />
             'this.m.bnd(this.fmSubtract1)' is an unrelated function included in order to cause re-render as soon as the button is clicked, rather than when onMouseLeave is executed.
 
           <br /><br />
@@ -606,37 +608,64 @@ Example 9, test.
           </button>
           <br /><br /><br />
 
+
+
+
+
+
+
+
+
+
+
+
+
         <h2 style={{textAlign: 'center' }} >Working With Numbers</h2>
 Here is the code for primitive monads:
         <br /><br />
 
-<MyComponent />
+<Component />
 
       <br />
       And here is how we use instances of Monad to pass values along chains of computations: <br /><br />
-        We begin by running the function 'mAdd' three times, once to assign the value of 'm + 100' to 'm3', and twice to give the sum to 'm' and
-        then to 'm2'. Here is the code for 'mAdd':<br /><br />
+        We begin by running the function 'mAdd' three times, once to assign the value of 'm + 10' to 'm', again to assign m's value plus 100 to m2, and finally to assign m2's value plus 1000 to m3. A one-second pause is inserted between the operations. This is the code for mAdd:<br /><br />
 
-<MyComponent4 />
-
-<br /><br />
-'z' is the value of the calling monad, which is 'm'. 'm' starts out with a value of '1'. 'mAdd' gives that value plus 100 to 'm3'.ional monad with a value of 1. The display here confirms that m is an object with a method 'x' which returns '1' when called with no argument. That is the expected behavior of a mobservabale reactive primitive value. Here is the code:
-<br /><br />
-
-<MyComponent5 />
+<Component4 />
 
 <br /><br />
-          <button style={this.style8(cr77,cr770,cr78)} onClick={() => {this.m.bnd(this.mAdd,100,this.m3).bnd(this.mAdd,0,this.m).bnd(this.mAdd,0,this.m2)}}
+And here is the code that is executed when the next button is clicked:
+<br /><br />
+
+<Component5 />
+
+<br /><br />
+<button style={this.style8(cr77,cr770,cr78)}
+  onClick={() => {this.m
+  .ret(5)
+  .bnd(this.pause,1)
+  .then(() => {this.m.bnd(this.mAdd,5,this.m2)
+  .bnd(this.pause,1)
+  .then(() => {this.m2.bnd(this.mAdd,5,this.m3)
+  }) }) }}
+
+
+
             onMouseEnter={() => {this.mouse[77] = 'blue', this.mouse[770] = 'lightblue', this.mouse[78] = 'yellow'}}
             onMouseLeave={() => {this.mouse[77] = '#000', this.mouse[770] = 'darkred', this.mouse[78] = 'burlywood'}}
             > this.m.bnd(this.mAdd,100,this.m3).bnd(this.mAdd,0,this.m).bnd(this.mAdd,0,this.m2)}
-          </button>
+</button>
           <br /><br />
-          <button style={this.style8(cr87,cr870,cr88)} onClick={() => {this.m.bnd(this.fmSubtract1)}}
+          <button style={this.style8(cr87,cr870,cr88)} onClick={() => {this.m
+            .bnd(this.fmSubtract1)
+            .bnd(this.fmSubtract1)
+            .bnd(this.pause,2)
+            .then(() => {this.m.bnd(this.fmSubtract1)
+            .bnd(this.fmSubtract1)
+            .bnd(this.fmSubtract1)})}}
             onMouseEnter={() => {this.mouse[87] = 'blue', this.mouse[870] = 'lightblue', this.mouse[88] = 'yellow'}}
             onMouseLeave={() => {this.mouse[87] = '#000', this.mouse[870] = 'darkred', this.mouse[88] = 'burlywood'}}
             > Click to decrease m.
-          </button>
+</button>
           <br /><br />
           <button style={this.style8(cr97,cr970,cr98)} onClick={() => {this.m.bnd(this.mAdd,1,this.m).bnd(this.mAdd,3,this.m).bnd(this.fmSquare).bnd(this.mAdd,1,this.m).bnd(this.fmSquare).bnd(this.mAdd,7,this.m)}} onMouseEnter={() => {this.mouse[97] = 'blue', this.mouse[970] = 'lightblue', this.mouse[98] = 'yellow'}}
             onMouseLeave={() => {this.mouse[97] = '#000', this.mouse[970] = 'darkred', this.mouse[98] = 'burlywood'}}
@@ -644,7 +673,7 @@ Here is the code for primitive monads:
           </button>
     Clicking runs
 
-<MyComponent6 />
+<Component6 />
 
           <h3>Left Identity</h3>
           <button style={this.style8(cr107,cr1070,cr108)} onClick={() => {this.m.ret(42).bnd(this.m.x)}}
@@ -705,7 +734,7 @@ Here is the code for primitive monads:
     It was the realization that mobservable reactive primitives provide access their current as well as their previous values that got me started on this investigation. Some Haskell monads - notably the state monad - hold their current and previous values.     <br /><br />
     The monad laws stated in terms of Haskell are:
     <br /><br />
-<MyComponent2 />
+<Component2 />
 
         <br /><br /><br />
         <h2 style={{textAlign: 'center' }} >Working With Text</h2>
@@ -782,7 +811,7 @@ Here is the code for primitive monads:
 Here is the code for all three monads:
 <br /><br />
 
-<MyComponent3 />
+<Component3 />
 <br /><br /><br /><br />
         </div>
 </div>
